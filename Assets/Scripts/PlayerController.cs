@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         if(!isRight && moveInput>0){
             Flip();
         }
-        if(Input.GetButtonUp("Jump")) {
+        if(Input.GetButtonDown("Jump")) {
             Collider2D isground = Physics2D.OverlapCircle(new Vector2(groundCheck.position.x,groundCheck.position.y),groundCheckRadius,groundMask);
             if(isground!=null && isground.CompareTag("Ground"))
             {

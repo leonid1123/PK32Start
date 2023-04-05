@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     float groundCheckRadius=0.1f;
     [SerializeField]
     LayerMask groundMask;
+    int HP = 100;
     void Start()
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
@@ -25,6 +26,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.M)) {
+            ChangeHP(5);
+        }
+        if (Input.GetKeyDown(KeyCode.N)) {
+            ChangeHP(-10);
+        }
         float moveInput = Input.GetAxisRaw("Horizontal");
         anim.SetFloat("spd",Mathf.Abs(moveInput));
         rb2d.velocity = new Vector2(moveInput*spd,rb2d.velocity.y);
@@ -50,5 +57,13 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(groundCheck.position,groundCheckRadius);
+    }
+    public void ChangeHP(int _x)
+    {
+        HP += _x;
+    }
+    public int GetHP()
+    {
+        return HP;
     }
 }

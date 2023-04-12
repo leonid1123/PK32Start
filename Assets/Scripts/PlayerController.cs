@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,8 +18,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     LayerMask groundMask;
     int HP = 100;
+    [SerializeField]
+    GameObject panel;
     void Start()
     {
+        panel.SetActive(false);
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
     }
@@ -61,6 +65,17 @@ public class PlayerController : MonoBehaviour
     public void ChangeHP(int _x)
     {
         HP += _x;
+        if (HP >= 100)
+        {
+            HP = 100;
+        }
+        if(HP <= 0)
+        {
+            HP = 0;
+            anim.SetTrigger("isDead");
+            panel.SetActive(true);
+            this.enabled = false;
+        }
     }
     public int GetHP()
     {
